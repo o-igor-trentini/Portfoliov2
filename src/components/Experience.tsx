@@ -24,6 +24,7 @@ export function Experience() {
         en: '2023 - Present',
         es: '2023 - Presente',
       },
+      current: true,
       location: {
         pt: 'Remoto',
         en: 'Remote',
@@ -69,6 +70,7 @@ export function Experience() {
         en: '2021 - 2023',
         es: '2021 - 2023',
       },
+      current: false,
       location: {
         pt: 'São Paulo, Brasil',
         en: 'São Paulo, Brazil',
@@ -111,6 +113,7 @@ export function Experience() {
         en: '2020 - 2021',
         es: '2020 - 2021',
       },
+      current: false,
       location: {
         pt: 'São Paulo, Brasil',
         en: 'São Paulo, Brazil',
@@ -172,9 +175,43 @@ export function Experience() {
                 className="relative"
               >
                 {/* Timeline dot */}
-                <div className="absolute left-8 top-8 w-4 h-4 rounded-full bg-purple-500 border-4 border-white dark:border-zinc-900 shadow-lg shadow-purple-500/50 -translate-x-1/2 hidden md:block z-10" />
+                <div
+                  className={`absolute left-8 top-8 w-4 h-4 rounded-full ${
+                    exp.current
+                      ? 'bg-gradient-to-r from-purple-500 to-pink-500 animate-pulse'
+                      : 'bg-purple-500'
+                  } border-4 border-white dark:border-zinc-900 shadow-lg shadow-purple-500/50 -translate-x-1/2 hidden md:block z-10`}
+                />
 
-                <div className="md:ml-20 bg-white dark:bg-zinc-900 rounded-2xl border border-zinc-200 dark:border-zinc-800 overflow-hidden hover:border-purple-500/50 transition-all duration-300">
+                <div
+                  className={`md:ml-20 bg-white dark:bg-zinc-900 rounded-2xl border ${
+                    exp.current
+                      ? 'border-purple-500 shadow-xl shadow-purple-500/20'
+                      : 'border-zinc-200 dark:border-zinc-800'
+                  } overflow-hidden hover:border-purple-500/50 transition-all duration-300 ${
+                    exp.current ? 'ring-2 ring-purple-500/20' : ''
+                  }`}
+                >
+                  {/* Badge "Atual" para o trabalho atual */}
+                  {exp.current && (
+                    <div className="absolute top-0 right-0 z-10">
+                      <div className="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-4 py-1.5 rounded-bl-2xl text-xs font-medium shadow-lg flex items-center gap-1.5">
+                        <motion.div
+                          animate={{
+                            scale: [1, 1.2, 1],
+                          }}
+                          transition={{
+                            duration: 2,
+                            repeat: Infinity,
+                            ease: 'easeInOut',
+                          }}
+                          className="w-2 h-2 bg-white rounded-full"
+                        />
+                        {t.experience.present}
+                      </div>
+                    </div>
+                  )}
+
                   <div className="p-6">
                     <div className="flex flex-wrap items-start justify-between gap-4 mb-4">
                       <div>

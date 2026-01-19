@@ -1,11 +1,12 @@
 import { motion } from 'motion/react';
-import { ExternalLink, ChevronRight } from 'lucide-react';
+import { ExternalLink, ChevronRight, Filter, Briefcase, GraduationCap } from 'lucide-react';
 import { useLanguage } from '../hooks/useLanguage';
 import { translations } from '../data/translations';
 import { projects, Project } from '../data/projects';
 import { Button } from './ui/button';
 import { Badge } from './ui/badge';
 import { ImageWithFallback } from './figma/ImageWithFallback';
+import { useState } from 'react';
 
 interface ProjectsProps {
   onProjectClick: (project: Project) => void;
@@ -14,6 +15,11 @@ interface ProjectsProps {
 export function Projects({ onProjectClick }: ProjectsProps) {
   const { language } = useLanguage();
   const t = translations[language];
+  const [selectedFilter, setSelectedFilter] = useState<'all' | 'professional' | 'study'>('all');
+
+  const filteredProjects = selectedFilter === 'all' 
+    ? projects 
+    : projects.filter(project => project.type === selectedFilter);
 
   return (
     <section id="projects" className="py-32 relative">
@@ -22,16 +28,63 @@ export function Projects({ onProjectClick }: ProjectsProps) {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-12"
         >
           <h2 className="mb-4">{t.projects.title}</h2>
-          <p className="text-zinc-600 dark:text-zinc-400">
+          <p className="text-zinc-600 dark:text-zinc-400 mb-8">
             {t.projects.subtitle}
           </p>
+
+          {/* Filtros de Projeto */}
+          <div className="flex flex-wrap items-center justify-center gap-3 mb-4">
+            <div className="flex items-center gap-2 text-sm text-zinc-600 dark:text-zinc-400">
+              <Filter className="w-4 h-4" />
+              {t.projects.filterLabel}:
+            </div>
+            <Button
+              variant={selectedFilter === 'all' ? 'default' : 'outline'}
+              size="sm"
+              onClick={() => setSelectedFilter('all')}
+              className={selectedFilter === 'all' ? 'bg-purple-500 hover:bg-purple-600' : ''}
+            >
+              {t.projects.all}
+            </Button>
+            <Button
+              variant={selectedFilter === 'professional' ? 'default' : 'outline'}
+              size="sm"
+              onClick={() => setSelectedFilter('professional')}
+              className={selectedFilter === 'professional' ? 'bg-purple-500 hover:bg-purple-600' : ''}
+            >
+              <Briefcase className="w-4 h-4 mr-2" />
+              {t.projects.professional}
+            </Button>
+            <Button
+              variant={selectedFilter === 'study' ? 'default' : 'outline'}
+              size="sm"
+              onClick={() => setSelectedFilter('study')}
+              className={selectedFilter === 'study' ? 'bg-purple-500 hover:bg-purple-600' : ''}
+            >
+              <GraduationCap className="w-4 h-4 mr-2" />
+              {t.projects.study}
+            </Button>
+          </div>
+
+          {/* Contador de Projetos */}
+          <motion.p 
+            key={selectedFilter}
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="text-sm text-zinc-500 dark:text-zinc-400"
+          >
+            {filteredProjects.length} {filteredProjects.length === 1 ? t.projects.projectCount : t.projects.projectsCount}
+          </motion.p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projects.map((project, index) => (
+        <motion.div 
+          layout
+          className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
+        >
+          {filteredProjects.map((project, index) => (
             <motion.div
               key={project.id}
               initial={{ opacity: 0, y: 20 }}
@@ -49,6 +102,21 @@ export function Projects({ onProjectClick }: ProjectsProps) {
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                  
+                  {/* Badge de Tipo */}
+                  <div className="absolute top-3 right-3">
+                    {project.type === 'professional' ? (
+                      <div className="flex items-center gap-1.5 bg-gradient-to-r from-purple-500 to-pink-500 text-white px-3 py-1.5 rounded-full text-xs font-medium shadow-lg backdrop-blur-sm">
+                        <Briefcase className="w-3 h-3" />
+                        {t.projects.professional}
+                      </div>
+                    ) : (
+                      <div className="flex items-center gap-1.5 bg-gradient-to-r from-blue-500 to-cyan-500 text-white px-3 py-1.5 rounded-full text-xs font-medium shadow-lg backdrop-blur-sm">
+                        <GraduationCap className="w-3 h-3" />
+                        {t.projects.study}
+                      </div>
+                    )}
+                  </div>
                 </div>
 
                 <div className="p-6 flex-1 flex flex-col">
@@ -95,7 +163,7 @@ export function Projects({ onProjectClick }: ProjectsProps) {
               </div>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

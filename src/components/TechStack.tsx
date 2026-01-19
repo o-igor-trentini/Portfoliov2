@@ -171,30 +171,6 @@ export function TechStack() {
             );
           })}
         </div>
-
-        {/* Legend */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="mt-12 max-w-4xl mx-auto"
-        >
-          <div className="bg-gradient-to-r from-purple-500/10 via-pink-500/10 to-purple-500/10 rounded-2xl p-6 border border-purple-500/20">
-            <h4 className="text-center mb-4 text-purple-500">Legenda</h4>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              {Object.entries(badgeLabels).map(([key, badge]) => (
-                <div key={key} className="flex items-center gap-2">
-                  <div className={`w-8 h-8 rounded-full bg-gradient-to-br ${badge.color} flex items-center justify-center shadow-lg`}>
-                    <span className="text-sm">{badge.icon}</span>
-                  </div>
-                  <div>
-                    <p className="text-sm font-medium">{badge[language]}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </motion.div>
       </div>
     </section>
   );
