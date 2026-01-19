@@ -14,6 +14,10 @@ export const translations = {
       description: 'Desenvolvedor apaixonado por criar soluções elegantes e escaláveis. Especializado em backend com Go e frontend moderno com React.',
       cta1: 'Ver Projetos',
       cta2: 'Entrar em Contato',
+      connect: 'Conecte-se comigo',
+      scrollToExplore: 'Scroll para explorar',
+      available: 'Disponível para projetos',
+      specialist: 'Especialista em',
     },
     projects: {
       title: 'Projetos',
@@ -111,6 +115,10 @@ export const translations = {
       description: 'Developer passionate about creating elegant and scalable solutions. Specialized in backend with Go and modern frontend with React.',
       cta1: 'View Projects',
       cta2: 'Get in Touch',
+      connect: 'Connect with me',
+      scrollToExplore: 'Scroll to explore',
+      available: 'Available for projects',
+      specialist: 'Specialist in',
     },
     projects: {
       title: 'Projects',
@@ -208,6 +216,10 @@ export const translations = {
       description: 'Desarrollador apasionado por crear soluciones elegantes y escalables. Especializado en backend con Go y frontend moderno con React.',
       cta1: 'Ver Proyectos',
       cta2: 'Contactar',
+      connect: 'Conecta conmigo',
+      scrollToExplore: 'Desplázate para explorar',
+      available: 'Disponible para proyectos',
+      specialist: 'Especialista en',
     },
     projects: {
       title: 'Proyectos',

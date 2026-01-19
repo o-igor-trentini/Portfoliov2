@@ -44,7 +44,7 @@ export function Hero() {
             repeat: Infinity,
             ease: 'linear',
           }}
-          className="absolute inset-0 opacity-50"
+          className="absolute inset-0 opacity-30 md:opacity-50"
           style={{
             backgroundImage: 'radial-gradient(at 20% 30%, rgba(124, 58, 237, 0.12) 0px, transparent 50%), radial-gradient(at 80% 70%, rgba(236, 72, 153, 0.1) 0px, transparent 50%)',
             backgroundSize: '300% 300%',
@@ -61,22 +61,22 @@ export function Hero() {
             repeat: Infinity,
             ease: 'linear',
           }}
-          className="absolute inset-0 opacity-40"
+          className="absolute inset-0 opacity-20 md:opacity-40"
           style={{
             backgroundImage: 'radial-gradient(at 60% 40%, rgba(124, 58, 237, 0.08) 0px, transparent 60%), radial-gradient(at 30% 80%, rgba(236, 72, 153, 0.08) 0px, transparent 60%)',
             backgroundSize: '250% 250%',
           }}
         />
 
-        {/* Interactive gradient that follows mouse */}
+        {/* Interactive gradient that follows mouse - Hidden on mobile */}
         <div 
-          className="absolute inset-0 opacity-50 transition-all duration-700"
+          className="absolute inset-0 opacity-50 transition-all duration-700 hidden md:block"
           style={{
             background: `radial-gradient(700px circle at ${mousePosition.x}% ${mousePosition.y}%, rgba(124, 58, 237, 0.15), transparent 50%)`,
           }}
         />
 
-        {/* Animated dots pattern */}
+        {/* Animated dots pattern - Smaller on mobile */}
         <motion.div
           animate={{
             opacity: [0.3, 0.5, 0.3],
@@ -89,12 +89,12 @@ export function Hero() {
           className="absolute inset-0"
           style={{
             backgroundImage: 'radial-gradient(circle at 2px 2px, rgba(124, 58, 237, 0.15) 1px, transparent 0)',
-            backgroundSize: '40px 40px',
+            backgroundSize: '30px 30px',
           }}
         />
 
-        {/* Animated mesh grid with SVG */}
-        <svg className="absolute inset-0 w-full h-full opacity-20" xmlns="http://www.w3.org/2000/svg">
+        {/* Animated mesh grid with SVG - Reduced opacity on mobile */}
+        <svg className="absolute inset-0 w-full h-full opacity-10 md:opacity-20" xmlns="http://www.w3.org/2000/svg">
           <defs>
             <linearGradient id="grid-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
               <stop offset="0%" stopColor="#7c3aed" stopOpacity="0.3">
@@ -227,6 +227,31 @@ export function Hero() {
         />
       </div>
 
+      {/* Minimalist Gray Grid Lines - SEPARATE LAYER ABOVE BACKGROUND */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden" style={{ zIndex: 1 }}>
+        {/* Vertical lines */}
+        <div 
+          className="absolute inset-0 opacity-20 dark:opacity-15"
+          style={{
+            backgroundImage: 'repeating-linear-gradient(90deg, transparent, transparent 99px, #71717a 99px, #71717a 100px)',
+          }}
+        />
+        {/* Horizontal lines */}
+        <div 
+          className="absolute inset-0 opacity-20 dark:opacity-15"
+          style={{
+            backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 99px, #71717a 99px, #71717a 100px)',
+          }}
+        />
+        {/* Diagonal grid overlay - subtle */}
+        <div 
+          className="absolute inset-0 opacity-10 dark:opacity-8"
+          style={{
+            backgroundImage: 'repeating-linear-gradient(45deg, transparent, transparent 149px, #71717a 149px, #71717a 150px)',
+          }}
+        />
+      </div>
+
       <div className="container mx-auto px-4 py-20">
         <div className="max-w-6xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
@@ -347,11 +372,11 @@ export function Hero() {
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ delay: 0.8 }}
                   whileHover={{ scale: 1.05 }}
-                  className="absolute -top-6 -right-6 bg-white dark:bg-zinc-900 rounded-2xl px-4 py-3 shadow-xl border border-zinc-200 dark:border-zinc-800 backdrop-blur-sm"
+                  className="absolute -top-4 -right-2 md:-top-6 md:-right-6 bg-white dark:bg-zinc-900 rounded-xl md:rounded-2xl px-3 py-2 md:px-4 md:py-3 shadow-xl border border-zinc-200 dark:border-zinc-800 backdrop-blur-sm"
                 >
                   <div className="flex items-center gap-2">
                     <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
-                    <span className="text-sm">Disponível para projetos</span>
+                    <span className="text-xs md:text-sm whitespace-nowrap">{t.hero.available}</span>
                   </div>
                 </motion.div>
 
@@ -360,13 +385,13 @@ export function Hero() {
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ delay: 1 }}
                   whileHover={{ scale: 1.05 }}
-                  className="absolute -bottom-6 -left-6 bg-white dark:bg-zinc-900 rounded-2xl px-4 py-3 shadow-xl border border-zinc-200 dark:border-zinc-800 backdrop-blur-sm"
+                  className="absolute -bottom-4 -left-2 md:-bottom-6 md:-left-6 bg-white dark:bg-zinc-900 rounded-xl md:rounded-2xl px-3 py-2 md:px-4 md:py-3 shadow-xl border border-zinc-200 dark:border-zinc-800 backdrop-blur-sm"
                 >
-                  <div className="flex items-center gap-3">
-                    <div className="text-2xl">💻</div>
+                  <div className="flex items-center gap-2 md:gap-3">
+                    <div className="text-xl md:text-2xl">💻</div>
                     <div>
-                      <p className="text-xs text-zinc-500">Especialista em</p>
-                      <p className="text-sm">Go • React • TS</p>
+                      <p className="text-xs text-zinc-500">{t.hero.specialist}</p>
+                      <p className="text-xs md:text-sm">Go • React • TS</p>
                     </div>
                   </div>
                 </motion.div>
@@ -450,7 +475,7 @@ export function Hero() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.8 }}
-                className="flex items-center justify-center lg:justify-start gap-4"
+                className="flex flex-wrap items-center justify-center lg:justify-start gap-3 md:gap-4"
               >
                 <motion.a
                   href="https://github.com/igortrentini"
@@ -472,8 +497,8 @@ export function Hero() {
                 >
                   <Linkedin className="w-5 h-5" />
                 </motion.a>
-                <div className="h-6 w-px bg-zinc-200 dark:bg-zinc-800" />
-                <span className="text-sm text-zinc-500">Conecte-se comigo</span>
+                <div className="hidden sm:block h-6 w-px bg-zinc-200 dark:bg-zinc-800" />
+                <span className="hidden sm:inline text-sm text-zinc-500">{t.hero.connect}</span>
               </motion.div>
 
               {/* Tech stack badges */}
@@ -481,7 +506,7 @@ export function Hero() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.9 }}
-                className="mt-12 flex flex-wrap gap-3 justify-center lg:justify-start"
+                className="mt-8 md:mt-12 flex flex-wrap gap-2 md:gap-3 justify-center lg:justify-start"
               >
                 {['Golang', 'React', 'TypeScript', 'PostgreSQL', 'Docker'].map((tech, i) => (
                   <motion.div
@@ -490,9 +515,9 @@ export function Hero() {
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ delay: 1 + i * 0.1 }}
                     whileHover={{ y: -4 }}
-                    className="px-4 py-2 rounded-lg bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-sm hover:shadow-md hover:border-purple-500/50 transition-all"
+                    className="px-3 md:px-4 py-1.5 md:py-2 rounded-lg bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-sm hover:shadow-md hover:border-purple-500/50 transition-all"
                   >
-                    <code className="text-sm text-purple-500">{tech}</code>
+                    <code className="text-xs md:text-sm text-purple-500">{tech}</code>
                   </motion.div>
                 ))}
               </motion.div>
@@ -506,9 +531,9 @@ export function Hero() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1, y: [0, 10, 0] }}
         transition={{ delay: 1.5, y: { duration: 2, repeat: Infinity } }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-zinc-400"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-2 text-zinc-400"
       >
-        <span className="text-xs">Scroll para explorar</span>
+        <span className="text-xs">{t.hero.scrollToExplore}</span>
         <div className="w-6 h-10 rounded-full border-2 border-zinc-300 dark:border-zinc-700 flex items-start justify-center p-2">
           <motion.div
             animate={{ y: [0, 12, 0] }}
